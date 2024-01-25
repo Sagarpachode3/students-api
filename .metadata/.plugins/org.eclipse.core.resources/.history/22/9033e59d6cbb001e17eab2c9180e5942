@@ -1,0 +1,5 @@
+package com.students.api.exceptions;
+
+public class ResourceNotFoundException {
+
+}

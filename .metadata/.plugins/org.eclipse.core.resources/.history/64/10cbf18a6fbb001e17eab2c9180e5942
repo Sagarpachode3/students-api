@@ -1,0 +1,37 @@
+package com.students.api.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.students.api.entity.Student;
+import com.students.api.service.IStudentServices;
+
+@RestController
+@RequestMapping("/api/students")
+public class StudentController {
+	
+	@Autowired
+	private IStudentServices studentsServices;
+	
+	//create student
+	
+	ResponseEntity<Student> createStudent(Student student){
+		Student createdStudent = this.studentsServices.createStudent(student);
+		return new ResponseEntity<Student>(createdStudent, HttpStatus.CREATED);
+	}
+	
+	//update Student
+	
+	//delete Student
+	
+	//getSingleStudent
+	
+	//get All Students List
+	
+	
+	
+	
+}

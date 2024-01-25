@@ -1,0 +1,5 @@
+package com.students.api.entity;
+
+public class Student {
+
+}

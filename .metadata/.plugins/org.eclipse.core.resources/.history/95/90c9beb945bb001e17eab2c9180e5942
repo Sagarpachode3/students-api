@@ -1,0 +1,5 @@
+package com.students.api.repository;
+
+public interface IStudentsRepo {
+
+}

@@ -1,0 +1,66 @@
+package com.students.api.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Service;
+
+import com.students.api.entity.Student;
+import com.students.api.exceptions.ResourceNotFoundException;
+import com.students.api.repository.IStudentsRepo;
+import com.students.api.service.IStudentServices;
+
+@Service
+public class StudentServiceImpl implements IStudentServices {
+	
+	@Autowired
+	private IStudentsRepo studentsRepo;
+
+	@Override
+	public Student createStudent(Student student) {
+		Student savedStudent = this.studentsRepo.save(student);
+		return savedStudent;
+	}
+
+	@Override
+	public Student updateStudent(Long studentId, Student updatedStudent) {
+		Student presentStudent = this.studentsRepo.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("Student","Student Id", studentId));
+		
+		presentStudent.setFirstName(updatedStudent.getFirstName());
+		presentStudent.setLastName(updatedStudent.getLastName());
+		presentStudent.setCourseOpted(updatedStudent.getCourseOpted());
+		presentStudent.setGender(updatedStudent.getGender());
+		presentStudent.setAge(updatedStudent.getAge());
+		
+		return this.studentsRepo.save(presentStudent);
+	}
+
+	@Override
+	public String deleteStudent(Long studentId) {
+		Student studentToBeDeleted = this.studentsRepo.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("Student","Student Id", studentId));
+		this.studentsRepo.delete(studentToBeDeleted);
+		
+	}
+
+	@Override
+	public Student getStudentById(Long studentId) {
+		Student student = this.studentsRepo.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("Student","Student Id", studentId));
+		return student;
+	}
+
+	@Override
+	public List<Student> getAllStudentsList() {
+		List<Student> allStudents = this.studentsRepo.findAll();
+		return allStudents;
+	}
+
+	
+
+}

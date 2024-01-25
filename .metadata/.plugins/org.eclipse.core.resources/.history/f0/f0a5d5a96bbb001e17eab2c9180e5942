@@ -1,0 +1,31 @@
+package com.students.api.service;
+
+import java.util.List;
+
+import com.students.api.entity.Student;
+import com.students.api.repository.IStudentsRepo;
+
+
+public interface IStudentServices extends IStudentsRepo {
+
+	//create student
+	
+	public Student createStudent(Student student);
+	
+	//update student
+	
+	public Student updateStudent(Long studentId, Student updatedStudent);
+	
+	//delete student
+	
+	public void deleteStudentById(Long studentId);
+	
+	//get student by id
+	
+	public Student getStudentById(Long studentId);
+	
+	//get all students
+	
+	public List<Student> getAllStudentsList();
+	
+}
